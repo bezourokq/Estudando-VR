@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Hand_Controller : MonoBehaviour
 {
     public GameObject hand_model;
     public bool hand;
+    private GameObject handGameObject;
     private InputDeviceCharacteristics ControllerC;
     private InputDevice targetDevice;
     private Animator handAnimator;
     private GameObject spawnedHand;
+    private bool raycastOn;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,17 +21,20 @@ public class Hand_Controller : MonoBehaviour
         if (hand)
         {
             ControllerC = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
+            handGameObject = GameObject.Find("RightHand Controller");
         }
         else
         {
             ControllerC = InputDeviceCharacteristics.Left | InputDeviceCharacteristics.Controller;
+            handGameObject = GameObject.Find("LeftHand Controller");
         }
         InputDevices.GetDevicesWithCharacteristics(ControllerC, devices);
         if (devices.Count > 0)
         {
             targetDevice = devices[0];
         }
-        
+
+        raycastOn = false;
 
         spawnedHand = Instantiate(hand_model, transform);
         handAnimator = spawnedHand.GetComponent<Animator>();
@@ -38,7 +44,12 @@ public class Hand_Controller : MonoBehaviour
 
     void UpdateHandAnimation()
     {
-        if(targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
+        if (targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryValue ) && primaryValue)
+        {
+            handGameObject.GetComponent<XRRayInteractor>().enabled = raycastOn;
+            raycastOn = !raycastOn;
+        }
+        if (targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue) && triggerValue > 0.1f)
         {
             handAnimator.SetFloat("Trigger", triggerValue);
         }
@@ -47,7 +58,7 @@ public class Hand_Controller : MonoBehaviour
             handAnimator.SetFloat("Trigger", 0);
         }
 
-        if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue))
+        if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue) && gripValue > 0.1f)
         {
             handAnimator.SetFloat("Grip", gripValue);
         }

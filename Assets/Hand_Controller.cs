@@ -14,6 +14,10 @@ public class Hand_Controller : MonoBehaviour
     private GameObject spawnedHand;
     private bool raycastOn;
     private GameObject objectGR;
+
+    Component[] animator;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,7 @@ public class Hand_Controller : MonoBehaviour
 
     void setUp()
     {
+
         List<InputDevice> devices = new List<InputDevice>();
 
         if (gameObject.name.Contains("Right"))
@@ -39,43 +44,41 @@ public class Hand_Controller : MonoBehaviour
         {
             targetDevice = devices[0];
         }
-
+        animator = gameObject.GetComponentsInChildren(typeof(Animator));
         raycastOn = false;
-
-        spawnedHand = Instantiate(hand_model, transform);
-        spawnedHand.AddComponent<SphereCollider>();
-        spawnedHand.GetComponent<SphereCollider>().isTrigger = true;
-        spawnedHand.GetComponent<SphereCollider>().radius = 0.07f;
-        //spawnedHand.AddComponent<Rigidbody>();
-        //spawnedHand.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-
-        handAnimator = spawnedHand.GetComponent<Animator>();
-
     }
 
     void UpdateHandAnimation()
     {
+        if(animator.Length == 0)
+            animator = gameObject.GetComponentsInChildren(typeof(Animator));
+
         if (targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryValue ) && primaryValue)
         {
-            handGameObject.GetComponent<XRRayInteractor>().enabled = raycastOn;
+            gameObject.GetComponent<XRRayInteractor>().enabled = raycastOn;
+            
             raycastOn = !raycastOn;
         }
         if (targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue) && triggerValue > 0.1f)
         {
-            handAnimator.SetFloat("Trigger", triggerValue);
+            foreach (Animator anim in animator)
+                anim.SetFloat("Trigger", triggerValue);
         }
         else
         {
-            handAnimator.SetFloat("Trigger", 0);
+            foreach (Animator anim in animator)
+                anim.SetFloat("Trigger", 0);
         }
 
         if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue) && gripValue > 0.1f)
         {
-            handAnimator.SetFloat("Grip", gripValue);
+            foreach (Animator anim in animator)
+                anim.SetFloat("Grip", gripValue);
         }
         else
         {
-            handAnimator.SetFloat("Grip", 0);
+            foreach (Animator anim in animator)
+                anim.SetFloat("Grip", 0);
         }
     }
 
@@ -87,8 +90,7 @@ public class Hand_Controller : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        Debug.Log(collision.gameObject.tag);
-        vibrate();
+        
         if (targetDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool gripValue) && gripValue)
         {
             if (collision.gameObject.tag.Contains("Interactable"))
@@ -100,8 +102,8 @@ public class Hand_Controller : MonoBehaviour
         }
         else
         {
-            objectGR.GetComponent<Rigidbody>().isKinematic = false;
-            objectGR.transform.parent = null;
+            //objectGR.GetComponent<Rigidbody>().isKinematic = false;
+            //objectGR.transform.parent = null;
         }
     }
 

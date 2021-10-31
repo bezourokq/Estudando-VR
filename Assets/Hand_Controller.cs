@@ -21,12 +21,12 @@ public class Hand_Controller : MonoBehaviour
         if (hand)
         {
             ControllerC = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
-            handGameObject = GameObject.Find("RightHand Controller");
+            handGameObject = GameObject.Find("Ray Interactor Right");
         }
         else
         {
             ControllerC = InputDeviceCharacteristics.Left | InputDeviceCharacteristics.Controller;
-            handGameObject = GameObject.Find("LeftHand Controller");
+            handGameObject = GameObject.Find("Ray Interactor Left");
         }
         InputDevices.GetDevicesWithCharacteristics(ControllerC, devices);
         if (devices.Count > 0)
@@ -37,6 +37,12 @@ public class Hand_Controller : MonoBehaviour
         raycastOn = false;
 
         spawnedHand = Instantiate(hand_model, transform);
+        
+        //spawnedHand.AddComponent<Rigidbody>();
+        //spawnedHand.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        //spawnedHand.AddComponent<SphereCollider>();
+        //spawnedHand.GetComponent<SphereCollider>().isTrigger = true;
+        //spawnedHand.GetComponent<SphereCollider>().radius = 0.05f;
         handAnimator = spawnedHand.GetComponent<Animator>();
 
 

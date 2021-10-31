@@ -29,7 +29,6 @@ public class OutlineController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.tag);
-        Debug.Log(collision.gameObject.name);
+
     }
 }

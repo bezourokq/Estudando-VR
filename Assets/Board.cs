@@ -4,20 +4,10 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    public GameObject temp;
-    public GameObject temp1;
-    public GameObject temp2;
-    public GameObject temp3;
     public float position;
     // Start is called before the first frame update
     void Start()
     {
-        //temp.transform.position = new Vector3(gameObject.transform.position.x - position, gameObject.transform.position.y, gameObject.transform.position.z);
-        //temp1.transform.position = new Vector3(gameObject.transform.position.x + position, gameObject.transform.position.y, gameObject.transform.position.z);
-        temp2.transform.position = new Vector3(gameObject.transform.position.x - position, gameObject.transform.position.y, gameObject.transform.position.z+position);
-        temp2.transform.eulerAngles = new Vector3(0, getRotation(temp2.transform.eulerAngles.y), 0);
-
-        //temp3.transform.position = new Vector3(gameObject.transform.position.x + position, gameObject.transform.position.y, gameObject.transform.position.z-position);
 
     }
 
@@ -27,8 +17,16 @@ public class Board : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Collider myChild = collision.contacts[0].thisCollider;
+        collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        collision.gameObject.transform.position = myChild.gameObject.transform.position;
+        collision.gameObject.transform.eulerAngles = new Vector3(0, getRotation(collision.gameObject.transform.eulerAngles.y), 0);
+    }
 
-    float getRotation(float y)
+
+        float getRotation(float y)
     {
         
         if (y < 0)

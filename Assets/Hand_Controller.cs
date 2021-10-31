@@ -102,8 +102,11 @@ public class Hand_Controller : MonoBehaviour
         }
         else
         {
-            //objectGR.GetComponent<Rigidbody>().isKinematic = false;
-            //objectGR.transform.parent = null;
+            if(objectGR.transform.parent != null)
+            {
+                objectGR.GetComponent<Rigidbody>().isKinematic = false;
+                objectGR.transform.parent = null;
+            }
         }
     }
 

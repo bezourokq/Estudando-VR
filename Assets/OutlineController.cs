@@ -10,17 +10,28 @@ public class OutlineController : MonoBehaviour
 {
     // Start is called before the first frame update
     private XRGrabInteractable interactor;
+    private GameObject piece;
+    private GameObject holder;
 
     void Start()
     {
         interactor = gameObject.GetComponent<XRGrabInteractable>();
         interactor.hoverEntered.AddListener(OnHoverEnter);
         interactor.hoverExited.AddListener(OnHoverExited);
+        foreach (Canvas panel in gameObject.GetComponentsInChildren(typeof(Canvas)))
+        {
+            panel.enabled = false;
+        }
     }
 
     public void setOutlineTrue()
     {
         gameObject.GetComponent<Outline>().enabled = true;
+    }
+
+    public void addHolder(GameObject myChild)
+    {
+        holder = myChild;
     }
 
     public void setOutlineFalse()
@@ -33,12 +44,18 @@ public class OutlineController : MonoBehaviour
 
     }
 
+    public GameObject GetPiece()
+    {
+        return piece;
+    }
+
     private void OnHoverEnter(HoverEnterEventArgs interactable)
     {
         foreach (Canvas panel in gameObject.GetComponentsInChildren(typeof(Canvas)))
         {
             panel.enabled = true;
         }
+        piece = interactable.interactable.gameObject;
         setOutlineTrue();
     }
 
@@ -47,7 +64,8 @@ public class OutlineController : MonoBehaviour
         foreach (Canvas panel in gameObject.GetComponentsInChildren(typeof(Canvas)))
         {
             panel.enabled = false;
-        }   
+        }
+        piece = null;
         setOutlineFalse();
     }
 

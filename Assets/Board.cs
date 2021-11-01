@@ -18,11 +18,14 @@ public class Board : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Collider myChild = collision.contacts[0].thisCollider;
-        collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-        collision.gameObject.transform.position = myChild.gameObject.transform.position;
-        collision.gameObject.transform.eulerAngles = new Vector3(0, getRotation(collision.gameObject.transform.eulerAngles.y), 0);
-        myChild.enabled = false;
+        if (collision.gameObject.tag.Contains("Piece"))
+        {
+            Collider myChild = collision.contacts[0].thisCollider;
+            collision.gameObject.transform.position = myChild.gameObject.transform.position;
+            collision.gameObject.transform.eulerAngles = new Vector3(0, getRotation(collision.gameObject.transform.eulerAngles.y), 0);
+            collision.gameObject.GetComponent<OutlineController>().addHolder(myChild.gameObject);
+            myChild.enabled = false;
+        }
 
     }
 

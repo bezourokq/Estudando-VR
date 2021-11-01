@@ -11,7 +11,7 @@ public class OutlineController : MonoBehaviour
     // Start is called before the first frame update
     private XRGrabInteractable interactor;
     private GameObject piece;
-    private GameObject holder;
+    private String holder;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class OutlineController : MonoBehaviour
         gameObject.GetComponent<Outline>().enabled = true;
     }
 
-    public void addHolder(GameObject myChild)
+    public void addHolder(String myChild)
     {
         holder = myChild;
     }
@@ -55,7 +55,32 @@ public class OutlineController : MonoBehaviour
         {
             panel.enabled = true;
         }
+        
         piece = interactable.interactable.gameObject;
+        
+        if (interactable.interactor.gameObject.GetComponent<Hand_Controller>().getGrip())
+        {
+            try
+            {
+                Debug.Log(piece.name + "piece");
+                Debug.Log(interactable.interactor.gameObject.name + "hand");
+                Debug.Log(holder + " holder");
+                //piece.transform.parent = null;
+                //piece.GetComponent<Rigidbody>().isKinematic = false;
+                //GameObject.Find(holder).GetComponent<BoxCollider>().isTrigger = false;
+            }
+            catch
+            {
+
+            }
+
+        }
+        else
+        {
+            //piece.GetComponent<Rigidbody>().isKinematic = true;
+        }
+
+
         setOutlineTrue();
     }
 
@@ -65,7 +90,8 @@ public class OutlineController : MonoBehaviour
         {
             panel.enabled = false;
         }
-        piece = null;
+        //piece.GetComponent<Rigidbody>().isKinematic = false;
+        //piece = null;
         setOutlineFalse();
     }
 

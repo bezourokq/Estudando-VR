@@ -424,8 +424,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.13, z: 0.13}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.056219697, y: 0.0562197, z: 0.0562197}
+  m_Center: {x: 0.017985921, y: 0.0052850507, z: 0.008980685}
 --- !u!1 &221070349
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 378708699}
   - component: {fileID: 378708698}
   m_Layer: 0
-  m_Name: CablePiece2 (1)
+  m_Name: CableCurve
   m_TagString: InteractablePiece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -802,8 +802,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378708697}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.716, y: 0.014414549, z: 2.04}
+  m_LocalRotation: {x: -0, y: -0.98111576, z: -0, w: 0.19342163}
+  m_LocalPosition: {x: -2.017, y: 0.365, z: 2.112}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1705105698}
@@ -813,7 +813,7 @@ Transform:
   - {fileID: 1162469209}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -157.695, z: 0}
 --- !u!1 &400702726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1519,7 +1519,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.13, z: 0.13}
+  m_Size: {x: 0.0562197, y: 0.0562197, z: 0.0562197}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &574707085
 GameObject:
@@ -1804,7 +1804,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638051234}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -1822,7 +1822,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638051234}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6c246a937bf2c244a6357462440f4b3, type: 3}
   m_Name: 
@@ -1847,13 +1847,37 @@ MonoBehaviour:
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1181644044}
+        m_TargetAssemblyTypeName: Reset, Assembly-CSharp
+        m_MethodName: reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_LastHoverExited:
     m_PersistentCalls:
       m_Calls: []
   m_HoverEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1181644044}
+        m_TargetAssemblyTypeName: Reset, Assembly-CSharp
+        m_MethodName: reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_HoverExited:
     m_PersistentCalls:
       m_Calls: []
@@ -2129,7 +2153,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.13, z: 0.13}
+  m_Size: {x: 0.0562197, y: 0.0562197, z: 0.0562197}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -3494,7 +3518,7 @@ GameObject:
   - component: {fileID: 1043408028}
   - component: {fileID: 1043408027}
   m_Layer: 0
-  m_Name: CablePiece (2)
+  m_Name: CableLine
   m_TagString: InteractablePiece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3672,8 +3696,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043408026}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.94, y: 0.461, z: 1.515}
+  m_LocalRotation: {x: -0, y: 0.6905868, z: -0, w: 0.7232496}
+  m_LocalPosition: {x: 1.669, y: 0.461, z: 1.243}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1907497671}
@@ -3681,7 +3705,7 @@ Transform:
   - {fileID: 1452998768}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 87.353, z: 0}
 --- !u!114 &1059692844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3736,7 +3760,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.13, z: 0.13}
+  m_Size: {x: 0.0562197, y: 0.0562197, z: 0.0562197}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1104502703
 GameObject:
@@ -4511,8 +4535,81 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.13, z: 0.13}
+  m_Size: {x: 0.0562197, y: 0.0562197, z: 0.0562197}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1181644043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1181644045}
+  - component: {fileID: 1181644044}
+  m_Layer: 0
+  m_Name: Reset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1181644044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181644043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f5c4cbeb4c21849bf62c34cc3f0a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  o1: {fileID: 378708697}
+  o2: {fileID: 7431027235182303349}
+  o3: {fileID: 1043408026}
+  o4: {fileID: 919132148255925344}
+  o5: {fileID: 9035024044132765295}
+  o6: {fileID: 626874836839431718}
+  temp1: {fileID: 0}
+  temp2: {fileID: 0}
+  temp3: {fileID: 0}
+  temp4: {fileID: 0}
+  temp5: {fileID: 0}
+  temp6: {fileID: 0}
+  c1: {fileID: 0}
+  c2: {fileID: 0}
+  c3: {fileID: 0}
+  c4: {fileID: 0}
+  c5: {fileID: 0}
+  c6: {fileID: 0}
+  c7: {fileID: 0}
+  c8: {fileID: 0}
+  c9: {fileID: 0}
+  tc1: {fileID: 0}
+  tc2: {fileID: 0}
+  tc3: {fileID: 0}
+  tc4: {fileID: 0}
+  tc5: {fileID: 0}
+  tc6: {fileID: 0}
+  tc7: {fileID: 0}
+  tc8: {fileID: 0}
+  tc9: {fileID: 0}
+--- !u!4 &1181644045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181644043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.65220934, y: 0.11480427, z: 1.0889266}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1182568032
 GameObject:
   m_ObjectHideFlags: 0
@@ -5493,7 +5590,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.13, z: 0.13}
+  m_Size: {x: 0.0562197, y: 0.0562197, z: 0.0562197}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1687138358
 GameObject:
@@ -5867,7 +5964,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.13, z: 0.13}
+  m_Size: {x: 0.0562197, y: 0.0562197, z: 0.0562197}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1759443790
 GameObject:
@@ -6356,7 +6453,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.13, z: 0.13}
+  m_Size: {x: 0.0562197, y: 0.0562197, z: 0.0562197}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2039760749
 GameObject:
@@ -6400,7 +6497,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.13, y: 0.13, z: 0.13}
+  m_Size: {x: 0.0562197, y: 0.0562197, z: 0.0562197}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2055521751
 GameObject:
@@ -7134,7 +7231,7 @@ GameObject:
   - component: {fileID: 512131797}
   - component: {fileID: 512131798}
   m_Layer: 0
-  m_Name: CablePiece (1)
+  m_Name: CableLine
   m_TagString: InteractablePiece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8490,7 +8587,7 @@ GameObject:
   - component: {fileID: 7431027235182303351}
   - component: {fileID: 7431027235182303350}
   m_Layer: 0
-  m_Name: CablePiece2
+  m_Name: CableCurve
   m_TagString: InteractablePiece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

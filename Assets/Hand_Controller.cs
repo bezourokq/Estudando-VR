@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class Hand_Controller : MonoBehaviour
     private InputDevice targetDevice;
     private Animator handAnimator;
     private GameObject spawnedHand;
-    private bool raycastOn;
+    private bool raycastOn,grip;
     private GameObject objectGR;
     private GameObject pointer;
 
@@ -22,6 +23,7 @@ public class Hand_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        grip = false;
         setUp();
     }
 
@@ -73,16 +75,22 @@ public class Hand_Controller : MonoBehaviour
 
         if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue) && gripValue > 0.1f)
         {
+            grip = true;
             foreach (Animator anim in animator)
                 anim.SetFloat("Grip", gripValue);
         }
         else
         {
+            grip = false;
             foreach (Animator anim in animator)
                 anim.SetFloat("Grip", 0);
         }
     }
 
+    public bool getGrip()
+    {
+        return grip;
+    }
 
     void Update()
     {

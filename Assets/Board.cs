@@ -22,7 +22,6 @@ public class Board : MonoBehaviour
         collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         collision.gameObject.transform.position = myChild.gameObject.transform.position;
         collision.gameObject.transform.eulerAngles = new Vector3(0, getRotation(collision.gameObject.transform.eulerAngles.y), 0);
-        collision.gameObject.GetComponent<OutlineController>().SetBox(myChild.gameObject);
         myChild.enabled = false;
 
     }

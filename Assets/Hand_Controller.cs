@@ -73,19 +73,17 @@ public class Hand_Controller : MonoBehaviour
 
         if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue) && gripValue > 0.1f)
         {
-            pointer.GetComponent<OutlineController>().pickUp();
             foreach (Animator anim in animator)
                 anim.SetFloat("Grip", gripValue);
         }
         else
         {
-            pointer.GetComponent<OutlineController>().drop();
             foreach (Animator anim in animator)
                 anim.SetFloat("Grip", 0);
         }
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         UpdateHandAnimation();
@@ -98,24 +96,31 @@ public class Hand_Controller : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+        try
+        {
+            if (targetDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool gripValue) && gripValue)
+            {
+                if (collision.gameObject.tag.Contains("Interactable"))
+                {
+                    collision.transform.parent = transform;
+                    collision.rigidbody.isKinematic = true;
+                    objectGR = collision.gameObject;
+                }
+            }
+            else
+            {
+                if (objectGR.transform.parent != null)
+                {
+                    objectGR.GetComponent<Rigidbody>().isKinematic = false;
+                    objectGR.transform.parent = null;
+                }
+            }
+        }
+        catch
+        {
+
+        }
         
-        if (targetDevice.TryGetFeatureValue(CommonUsages.gripButton, out bool gripValue) && gripValue)
-        {
-            if (collision.gameObject.tag.Contains("Interactable"))
-            {
-                collision.transform.parent = transform;
-                collision.rigidbody.isKinematic = true;
-                objectGR = collision.gameObject;
-            }
-        }
-        else
-        {
-            if(objectGR.transform.parent != null)
-            {
-                objectGR.GetComponent<Rigidbody>().isKinematic = false;
-                objectGR.transform.parent = null;
-            }
-        }
     }
 
     public void vibrate()

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    public float position;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +22,16 @@ public class Board : MonoBehaviour
         collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         collision.gameObject.transform.position = myChild.gameObject.transform.position;
         collision.gameObject.transform.eulerAngles = new Vector3(0, getRotation(collision.gameObject.transform.eulerAngles.y), 0);
+        collision.gameObject.GetComponent<OutlineController>().SetBox(myChild.gameObject);
+        myChild.enabled = false;
+
     }
 
 
-        float getRotation(float y)
+
+
+    private float getRotation(float y)
     {
-        
         if (y < 0)
             y = -y;
         Debug.Log(y);

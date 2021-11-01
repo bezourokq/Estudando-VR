@@ -14,6 +14,7 @@ public class Hand_Controller : MonoBehaviour
     private GameObject spawnedHand;
     private bool raycastOn;
     private GameObject objectGR;
+    private GameObject pointer;
 
     Component[] animator;
 
@@ -72,11 +73,13 @@ public class Hand_Controller : MonoBehaviour
 
         if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue) && gripValue > 0.1f)
         {
+            pointer.GetComponent<OutlineController>().pickUp();
             foreach (Animator anim in animator)
                 anim.SetFloat("Grip", gripValue);
         }
         else
         {
+            pointer.GetComponent<OutlineController>().drop();
             foreach (Animator anim in animator)
                 anim.SetFloat("Grip", 0);
         }
@@ -86,6 +89,11 @@ public class Hand_Controller : MonoBehaviour
     void Update()
     {
         UpdateHandAnimation();
+    }
+
+    void SetPointer(GameObject pointer)
+    {
+        this.pointer = pointer;
     }
 
     private void OnCollisionStay(Collision collision)

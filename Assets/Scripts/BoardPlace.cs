@@ -6,11 +6,15 @@ public class BoardPlace //piece
 {
     string name;
     float direction;
+    int position;
+    GameObject piece;
 
-    public BoardPlace(string name,float direction)
+    public BoardPlace(string name,float direction,int position,GameObject piece)
     {
         this.name = name;
         this.direction = direction;
+        this.position = position;
+        this.piece = piece;
     }
 
     public string getName()
@@ -21,6 +25,16 @@ public class BoardPlace //piece
     public float getDirection()
     {
         return direction;
+    }
+
+    public float getPosition()
+    {
+        return position;
+    }
+
+    public GameObject getPiece()
+    {
+        return piece;
     }
 
     public int getType()

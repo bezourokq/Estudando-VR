@@ -9,9 +9,12 @@ public class Board : MonoBehaviour
     float direction;
     BoardPlace[] boardMap;
     int count;
+    Puzzle puzzle;
+    public Material teste;
     // Start is called before the first frame update
     void Start()
     {
+        puzzle = new Puzzle();
         count = 0;
         boardMap = new BoardPlace[10];
         holdingName = "";
@@ -23,7 +26,9 @@ public class Board : MonoBehaviour
     {
         if(count == 6)
         {
-             
+            setCollor();
+            puzzle.PuzzleValidator(boardMap, 0);
+            count = 0;
         }
     }
 
@@ -35,20 +40,8 @@ public class Board : MonoBehaviour
             isHolding = true;
             direction = getRotation(collision.gameObject.transform.eulerAngles.y);
             //Debug.Log(int.Parse(myChild.gameObject.name.Substring(0, 1)));
-            boardMap.SetValue(new BoardPlace(collision.gameObject.name, direction), int.Parse(myChild.gameObject.name.Substring(0, 1)));
+            boardMap.SetValue(new BoardPlace(collision.gameObject.name, direction, int.Parse(myChild.gameObject.name.Substring(0, 1)),collision.gameObject), int.Parse(myChild.gameObject.name.Substring(0, 1)));
             count++;
-            foreach (BoardPlace b in boardMap)
-            {
-                try
-                {
-                   
-                    Debug.Log(b.getType() + " " + b.getDirection() + " tamanho " + count);
-                }
-                catch
-                {
-
-                }
-            }
 
             collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             collision.gameObject.transform.position = myChild.gameObject.transform.position;
@@ -68,6 +61,30 @@ public class Board : MonoBehaviour
     }
 
 
+    private void setCollor()
+    {
+        foreach (BoardPlace b in boardMap)
+        {
+            try
+            {
+                foreach (Transform child in b.getPiece().transform)
+                {
+                    if (child.name.Contains("Cylinder"))
+                    {
+                        child.gameObject.GetComponent<MeshRenderer>().material = teste;
+                    }
+                    if (child.name.Contains("Ground"))
+                    {
+                        child.gameObject.GetComponent<MeshRenderer>().material = teste;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+        }
+    }
 
 
     private float getRotation(float y)

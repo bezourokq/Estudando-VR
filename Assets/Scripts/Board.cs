@@ -8,10 +8,12 @@ public class Board : MonoBehaviour
     string holdingName;
     float direction;
     BoardPlace[] boardMap;
+    int count;
     // Start is called before the first frame update
     void Start()
     {
-        boardMap = new BoardPlace[9];
+        count = 0;
+        boardMap = new BoardPlace[10];
         holdingName = "";
         isHolding = false;
     }
@@ -19,7 +21,10 @@ public class Board : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(count == 6)
+        {
+             
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -29,9 +34,21 @@ public class Board : MonoBehaviour
             Collider myChild = collision.contacts[0].thisCollider;
             isHolding = true;
             direction = getRotation(collision.gameObject.transform.eulerAngles.y);
-            Debug.Log(int.Parse(myChild.gameObject.name.Substring(0, 1)));
-            boardMap.SetValue(new BoardPlace(myChild.gameObject.name, direction), int.Parse(myChild.gameObject.name.Substring(0, 1)));
-            
+            //Debug.Log(int.Parse(myChild.gameObject.name.Substring(0, 1)));
+            boardMap.SetValue(new BoardPlace(collision.gameObject.name, direction), int.Parse(myChild.gameObject.name.Substring(0, 1)));
+            count++;
+            foreach (BoardPlace b in boardMap)
+            {
+                try
+                {
+                   
+                    Debug.Log(b.getType() + " " + b.getDirection() + " tamanho " + count);
+                }
+                catch
+                {
+
+                }
+            }
 
             collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             collision.gameObject.transform.position = myChild.gameObject.transform.position;
@@ -40,11 +57,11 @@ public class Board : MonoBehaviour
             
             collision.gameObject.transform.eulerAngles = new Vector3(0, getRotation(collision.gameObject.transform.eulerAngles.y), 0);
             collision.gameObject.GetComponent<OutlineController>().addHolder(myChild.gameObject.name);
-            //myChild.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+            myChild.gameObject.GetComponent<BoxCollider>().isTrigger = true;
         }
 
     }
-    //270 or 90
+
     private void OnCollisionExit(Collision collision)
     {
 
@@ -53,7 +70,7 @@ public class Board : MonoBehaviour
 
 
 
-        private float getRotation(float y)
+    private float getRotation(float y)
     {
         if (y < 0)
             y = -y;

@@ -24,7 +24,7 @@ public class Board : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(count == 6)
+        if(count == 1)
         {
             setCollor();
             puzzle.PuzzleValidator(boardMap, 0);

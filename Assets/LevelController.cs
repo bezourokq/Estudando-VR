@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class LevelController : MonoBehaviour
     Piece[] board4 = new Piece[7];
     Piece[] board5 = new Piece[5];
     int pieceCount1, pieceCount2, pieceCount3, pieceCount4, pieceCount5;
-    public Material material1, material2, material3, material4,material5;
+    public GameObject win1,lose1;
+    public Material material1, material2, material3, material4,material5,material6;
     public GameObject Level1;
     // 0 is wire
     // 1 is a resistor
@@ -31,6 +33,8 @@ public class LevelController : MonoBehaviour
         pieceCount3 = 0;
         pieceCount4 = 0;
         pieceCount5 = 0;
+        win1.SetActive(false);
+        lose1.SetActive(false);
     }
 
     // Update is called once per frame
@@ -47,8 +51,8 @@ public class LevelController : MonoBehaviour
         {
             try
             {
-                Debug.Log("Tipo peça " + piece.getType());
-                Debug.Log("Rotação peca " + piece.getDirection());
+                //Debug.Log("Tipo peça " + piece.getType());
+               // Debug.Log("Rotação peca " + piece.getDirection());
             }
             catch
             {
@@ -137,6 +141,7 @@ public class LevelController : MonoBehaviour
                         setCollor(Level1, 1);
                         
                         setColorLed(boardVector[0], true);
+                        win1.SetActive(true);
                         //green led and resdistor
                     }
                     if (pieceCount1 == 12)
@@ -147,7 +152,7 @@ public class LevelController : MonoBehaviour
                         setCollor(Level1, 1);
                         setParticle(boardVector[1]);
                         setColorLed(boardVector[1], false);
-
+                        lose1.SetActive(true);
                         //green led and resdistor
                     }
 
@@ -208,9 +213,16 @@ public class LevelController : MonoBehaviour
 
     public void resetState(int board)
     {
+
+   
+
+
+                
         switch (board)
         {
             case 1:
+                setCollor(board1[0], 4, 4);
+                setCollor(board1[1], 4, 4);
                 board1 = new Piece[2];
                 break;
             case 2:
@@ -326,7 +338,10 @@ public class LevelController : MonoBehaviour
                 break;
             case 3:
                 return material3;
-                break;  
+                break;
+            case 4:
+                return material6;
+                break;
             default:
                 return null;
         }

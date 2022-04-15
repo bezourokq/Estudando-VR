@@ -12,10 +12,11 @@ public class LevelController : MonoBehaviour
     Piece[] board3 = new Piece[3];
     Piece[] board4 = new Piece[7];
     Piece[] board5 = new Piece[5];
-    int pieceCount1, pieceCount2, pieceCount3, pieceCount4, pieceCount5;
-    public GameObject win1,lose1;
-    public Material material1, material2, material3, material4,material5,material6;
-    public GameObject Level1;
+    string pieceCount1, pieceCount2, pieceCount3, pieceCount4, pieceCount5;
+    public GameObject win1, lose1;
+    public Material material1, material2, material3, material4, material5, material6;
+    public GameObject Level1, Level2;
+
     // 0 is wire
     // 1 is a resistor
     // 2 is a led
@@ -28,11 +29,11 @@ public class LevelController : MonoBehaviour
     void Start()
     {
 
-        pieceCount1 = 0;
-        pieceCount2 = 0;
-        pieceCount3 = 0;
-        pieceCount4 = 0;
-        pieceCount5 = 0;
+        pieceCount1 = "0";
+        pieceCount2 = "0";
+        pieceCount3 = "0";
+        pieceCount4 = "0";
+        pieceCount5 = "0";
         win1.SetActive(false);
         lose1.SetActive(false);
     }
@@ -52,7 +53,7 @@ public class LevelController : MonoBehaviour
             try
             {
                 //Debug.Log("Tipo peça " + piece.getType());
-               // Debug.Log("Rotação peca " + piece.getDirection());
+                // Debug.Log("Rotação peca " + piece.getDirection());
             }
             catch
             {
@@ -64,87 +65,61 @@ public class LevelController : MonoBehaviour
         switch (board)
         {
 
-            
+
             case 1:
                 try
                 {
-                    pieceCount1 = 0;
-                    if (boardVector[0] != null && boardVector[0].getType() == 2)
+                    pieceCount1 = "0";
+                    for (int n = 0; n < 2; n++)
                     {
-                        if (boardVector[0].getDirection() == 180)
+                        if (boardVector[n] != null && boardVector[n].getType() == 1)
                         {
-                            pieceCount1 = pieceCount1 + 1;
-                            //yellow led
-                            setCollor(boardVector[0],3,2);
+                            if (boardVector[n].getDirection() == 0)
+                            {
+                                pieceCount1 = pieceCount1 + n.ToString() + "10";
+                                //yellow resistor
+                                setCollor(boardVector[n], 2, 2);
+                            }
+                            else if (boardVector[n].getDirection() == 180)
+                            {
+                                pieceCount1 = pieceCount1 + n.ToString() + "10";
+                                //yellow resistor
+                                setCollor(boardVector[n], 2, 2);
+                            }
                         }
-                        else if (boardVector[0].getDirection() == 0)
+                        if (boardVector[n] != null && boardVector[n].getType() == 2)
                         {
-                            pieceCount1 = pieceCount1 + 2;
-                            //yellow led
-                            setCollor(boardVector[0], 2, 2);
-                        }
-                    }
-                    
-                    if (boardVector[1] != null && boardVector[1].getType() == 2)
-                    {
-                        if (boardVector[1].getDirection() == 0)
-                        {
-                            pieceCount1 = pieceCount1 + 2;
-                            //yellow led
-                            setCollor(boardVector[1], 2, 2);
-                        }
-                        else if (boardVector[1].getDirection() == 180)
-                        {
-                            pieceCount1 = pieceCount1 + 2;
-                            //yellow led
-                            setCollor(boardVector[1], 2, 2);
-                        }
-                    }
-                    if (boardVector[0] != null && boardVector[0].getType() == 1)
-                    {
-                        if (boardVector[0].getDirection() == 0 )
-                        {
-                            pieceCount1 = pieceCount1 + 10;
-                            //yellow resistor
-                            setCollor(boardVector[0], 2, 2);
-                        }
-                        else if (boardVector[0].getDirection() == 180)
-                        {
-                            pieceCount1 = pieceCount1 + 10;
-                            //yellow resistor
-                            setCollor(boardVector[0], 2, 2);
-                        }
-                    }
 
-                    if (boardVector[1] != null && boardVector[1].getType() == 1)
-                    {
-                        if (boardVector[1].getDirection() == 0)
-                        {
-                            pieceCount1 = pieceCount1 + 10;
-                            //yellow resistor
-                            setCollor(boardVector[1], 2, 2);
+                            if (boardVector[n].getDirection() == 0)
+                            {
+                                pieceCount1 = pieceCount1 + n.ToString() + "20";
+                                //yellow led
+                                setCollor(boardVector[n], 2, 2);
+                            }
+                            else if (boardVector[n].getDirection() == 180)
+                            {
+                                pieceCount1 = pieceCount1 + n.ToString() + "21";
+                                //yellow led
+                                setCollor(boardVector[n], 3, 2);
+                            }
                         }
-                        else if (boardVector[1].getDirection() == 180)
-                        {
-                            pieceCount1 = pieceCount1 + 10;
-                            //yellow resistor
-                            setCollor(boardVector[1], 2, 2);
-                        }
+
                     }
 
 
-                    if (pieceCount1 == 11)
+                    Debug.Log("Codigo Final" + pieceCount1);
+                    if (pieceCount1 == "0021110")
                     {
                         Debug.Log("win");
                         setCollor(boardVector[0], 1, 1);
                         setCollor(boardVector[1], 1, 1);
                         setCollor(Level1, 1);
-                        
+
                         setColorLed(boardVector[0], true);
                         win1.SetActive(true);
                         //green led and resdistor
                     }
-                    if (pieceCount1 == 12)
+                    if (pieceCount1 == "0010121")
                     {
                         Debug.Log("Queimou");
                         setCollor(boardVector[0], 1, 1);
@@ -164,6 +139,153 @@ public class LevelController : MonoBehaviour
                 }
                 break;
             case 2:
+                pieceCount2 = "0";
+                for (int n = 0; n < 4; n++)
+                {
+                    if (boardVector[n] != null && boardVector[n].getType() == 0)
+                    {
+
+                        if (boardVector[n].getDirection() == 0)
+                        {
+                            pieceCount2 = pieceCount2  + "00";
+                            //yellow led
+                            setCollor(boardVector[n], 2, 2);
+                        }
+                        else if (boardVector[n].getDirection() == 180)
+                        {
+                            pieceCount2 = pieceCount2  + "00";
+                            //yellow led
+                            setCollor(boardVector[n], 3, 2);
+                        }
+                    }
+                    if (boardVector[n] != null && boardVector[n].getType() == 1)
+                    {
+                        if (boardVector[n].getDirection() == 0)
+                        {
+                            pieceCount2 = pieceCount2  + "10";
+                            //yellow resistor
+                            setCollor(boardVector[n], 2, 2);
+                        }
+                        else if (boardVector[n].getDirection() == 180)
+                        {
+                            pieceCount2 = pieceCount2  + "10";
+                            //yellow resistor
+                            setCollor(boardVector[n], 2, 2);
+                        }
+                    }
+                    if (boardVector[n] != null && boardVector[n].getType() == 2)
+                    {
+
+                        if (boardVector[n].getDirection() == 0)
+                        {
+                            pieceCount2 = pieceCount2 + "20";
+                            //yellow led
+                            setCollor(boardVector[n], 2, 2);
+                        }
+                        else if (boardVector[n].getDirection() == 180)
+                        {
+                            pieceCount2 = pieceCount2  + "21";
+                            //yellow led
+                            setCollor(boardVector[n], 3, 2);
+                        }
+                    }
+                    if (boardVector[n] != null && boardVector[n].getType() == 3)
+                    {
+
+                        if (boardVector[n].getDirection() == 0)
+                        {
+                            pieceCount2 = pieceCount2  + "30";
+                            //yellow led
+                            setCollor(boardVector[n], 2, 2);
+                        }
+                        else if (boardVector[n].getDirection() == 180)
+                        {
+                            pieceCount2 = pieceCount2 + "30";
+                            //yellow led
+                            setCollor(boardVector[n], 3, 2);
+                        }
+                    }
+                }
+
+
+                Debug.Log("Codigo Final " + pieceCount2);
+
+                //led acende normal
+                if (pieceCount2 == "02110" || pieceCount2 == "01021") 
+                
+                {
+                    Debug.Log("solucao 1");
+                    setCollor(boardVector[0], 1, 1);
+                    setCollor(boardVector[1], 1, 1);
+                    setCollor(boardVector[2], 1, 1);
+                    setCollor(boardVector[3], 1, 1);
+                    setColorLed(boardVector[0], true);
+                    setColorLed(boardVector[2], true);
+                    setCollorChild(Level2, 1);
+                }
+
+
+                //led acende com o switch
+                if (pieceCount2 == "0302110" || 
+                    pieceCount2 == "0301021" || 
+                    pieceCount2 == "0213010" || 
+                    pieceCount2 == "0211030")
+                {
+                    Debug.Log("solucao 1");
+                    setCollor(boardVector[0], 1, 1);
+                    setCollor(boardVector[1], 1, 1);
+                    setCollor(boardVector[2], 1, 1);
+                    setCollor(boardVector[3], 1, 1);
+                    setColorLed(boardVector[0], false);
+                    setColorLed(boardVector[2], false);
+                    setCollorChild(Level2, 1);
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // curto com o fio faz queimar o led
+                if (pieceCount2 == "02100" || 
+                    pieceCount2 == "00021" || 
+                    pieceCount2 == "0102100" ||
+                    pieceCount2 == "0100021" ||
+                    pieceCount2 == "0210010" ||
+                    pieceCount2 == "0211000")
+                {
+                    Debug.Log("solucao 3");
+                }
+                //switch faz queimar o led
+                if (pieceCount2 == "02130" ||
+                    pieceCount2 == "03021" ||
+                    pieceCount2 == "0102130" ||
+                    pieceCount2 == "021103000" ||
+                    pieceCount2 == "021003010" ||
+                    pieceCount2 == "030002110" ||
+                    pieceCount2 == "031002100") 
+                {
+                    Debug.Log("solucao 4"); 
+                }
 
                 break;
             case 3:
@@ -214,10 +336,10 @@ public class LevelController : MonoBehaviour
     public void resetState(int board)
     {
 
-   
 
 
-                
+
+
         switch (board)
         {
             case 1:
@@ -285,7 +407,7 @@ public class LevelController : MonoBehaviour
                         child.gameObject.GetComponent<MeshRenderer>().material = material5; ;
                     }
                 }
-                
+
             }
         }
         catch
@@ -303,8 +425,8 @@ public class LevelController : MonoBehaviour
             {
                 if (child.name.Contains("Particle"))
                 {
-                   var em = child.gameObject.GetComponent<ParticleSystem>().emission;
-                   em.enabled = true;
+                    var em = child.gameObject.GetComponent<ParticleSystem>().emission;
+                    em.enabled = true;
 
 
                 }
@@ -319,7 +441,25 @@ public class LevelController : MonoBehaviour
 
     private void setCollor(GameObject line, int color1)
     {
-        line.GetComponent<MeshRenderer>().material = getCollor(color1);              
+        line.GetComponent<MeshRenderer>().material = getCollor(color1);
+    }
+
+    private void setCollorChild(GameObject line, int color1)
+    {
+
+        try
+        {
+            foreach (Transform child in line.transform)
+            {
+
+                child.gameObject.GetComponent<MeshRenderer>().material = getCollor(color1);
+                
+            }
+        }
+        catch
+        {
+
+        }
     }
 
 
@@ -345,7 +485,7 @@ public class LevelController : MonoBehaviour
             default:
                 return null;
         }
-                
+
     }
 }
 

@@ -304,7 +304,51 @@ public class LevelController : MonoBehaviour
 
                     break;
             case 3:
+                try
+                {
+                    pieceCount3 = "0";
+                    for (int n = 0; n < 3; n++)
+                    {
+                        if (boardVector[n] != null && boardVector[n].getType() == 1)
+                        {
+                            if (boardVector[n].getDirection() == 0)
+                            {
+                                pieceCount3 = pieceCount3 + n.ToString() + "10";
+                                //yellow resistor
+                                setCollor(boardVector[n], 2, 2);
+                            }
+                            else if (boardVector[n].getDirection() == 180)
+                            {
+                                pieceCount3 = pieceCount3 + n.ToString() + "10";
+                                //yellow resistor
+                                setCollor(boardVector[n], 2, 2);
+                            }
+                        }
+                        if (boardVector[n] != null && boardVector[n].getType() == 2)
+                        {
 
+                            if (boardVector[n].getDirection() == 0)
+                            {
+                                pieceCount3 = pieceCount3 + n.ToString() + "20";
+                                //yellow led
+                                setCollor(boardVector[n], 2, 2);
+                            }
+                            else if (boardVector[n].getDirection() == 180)
+                            {
+                                pieceCount3 = pieceCount3 + n.ToString() + "21";
+                                //yellow led
+                                setCollor(boardVector[n], 2, 2);
+                            }
+                        }
+
+                    }
+
+                    Debug.Log("Codigo Final " + pieceCount3);
+                }
+                catch
+                {
+                    break;
+                }
                 break;
             case 4:
 

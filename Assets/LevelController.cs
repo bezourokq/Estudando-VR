@@ -16,6 +16,8 @@ public class LevelController : MonoBehaviour
     public GameObject win1, lose1;
     public Material material1, material2, material3, material4, material5, material6;
     public GameObject Level1, Level2;
+    public GameObject switch1, switch2;
+    public GameObject switchbar1a, switchbar1b, switchbar2a, switchbar2b;
 
     // 0 is wire
     // 1 is a resistor
@@ -28,7 +30,7 @@ public class LevelController : MonoBehaviour
 
     void Start()
     {
-
+        switchbar1a.GetComponent<MeshRenderer>().enabled = false;
         pieceCount1 = "0";
         pieceCount2 = "0";
         pieceCount3 = "0";
@@ -100,7 +102,7 @@ public class LevelController : MonoBehaviour
                             {
                                 pieceCount1 = pieceCount1 + n.ToString() + "21";
                                 //yellow led
-                                setCollor(boardVector[n], 3, 2);
+                                setCollor(boardVector[n], 2, 2);
                             }
                         }
 
@@ -155,7 +157,7 @@ public class LevelController : MonoBehaviour
                         {
                             pieceCount2 = pieceCount2  + "00";
                             //yellow led
-                            setCollor(boardVector[n], 3, 2);
+                            setCollor(boardVector[n], 2, 2);
                         }
                     }
                     if (boardVector[n] != null && boardVector[n].getType() == 1)
@@ -181,12 +183,14 @@ public class LevelController : MonoBehaviour
                             pieceCount2 = pieceCount2 + "20";
                             //yellow led
                             setCollor(boardVector[n], 2, 2);
+                            setColorLed(boardVector[n], false);
                         }
                         else if (boardVector[n].getDirection() == 180)
                         {
                             pieceCount2 = pieceCount2  + "21";
                             //yellow led
-                            setCollor(boardVector[n], 3, 2);
+                            setCollor(boardVector[n], 2, 2);
+                            setColorLed(boardVector[n], false);
                         }
                     }
                     if (boardVector[n] != null && boardVector[n].getType() == 3)
@@ -202,7 +206,7 @@ public class LevelController : MonoBehaviour
                         {
                             pieceCount2 = pieceCount2 + "30";
                             //yellow led
-                            setCollor(boardVector[n], 3, 2);
+                            setCollor(boardVector[n], 2, 2);
                         }
                     }
                 }
@@ -224,7 +228,6 @@ public class LevelController : MonoBehaviour
                     setCollorChild(Level2, 1);
                 }
 
-
                 //led acende com o switch
                 if (pieceCount2 == "0302110" || 
                     pieceCount2 == "0301021" || 
@@ -232,38 +235,14 @@ public class LevelController : MonoBehaviour
                     pieceCount2 == "0211030")
                 {
                     Debug.Log("solucao 1");
-                    setCollor(boardVector[0], 1, 1);
-                    setCollor(boardVector[1], 1, 1);
-                    setCollor(boardVector[2], 1, 1);
-                    setCollor(boardVector[3], 1, 1);
+                    setCollor(boardVector[0], 1, 1, 2);
+                    setCollor(boardVector[1], 1, 1, 2);
+                    setCollor(boardVector[2], 1, 1, 2);
+                    setCollor(boardVector[3], 1, 1, 2);
                     setColorLed(boardVector[0], false);
                     setColorLed(boardVector[2], false);
                     setCollorChild(Level2, 1);
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 // curto com o fio faz queimar o led
                 if (pieceCount2 == "02100" || 
@@ -273,8 +252,22 @@ public class LevelController : MonoBehaviour
                     pieceCount2 == "0210010" ||
                     pieceCount2 == "0211000")
                 {
-                    Debug.Log("solucao 3");
+                    setCollor(boardVector[0], 1, 1);
+                    setCollor(boardVector[1], 1, 1);
+                    setCollor(boardVector[2], 1, 1);
+                    setCollor(boardVector[3], 1, 1);
+                    setColorLed(boardVector[0], false);
+                    setColorLed(boardVector[1], false);
+                    setColorLed(boardVector[2], false);
+                    setColorLed(boardVector[3], false);
+                    setParticle(boardVector[0]);
+                    setParticle(boardVector[1]);
+                    setParticle(boardVector[2]);
+                    setParticle(boardVector[3]);
+
+                    setCollorChild(Level2, 1);
                 }
+
                 //switch faz queimar o led
                 if (pieceCount2 == "02130" ||
                     pieceCount2 == "03021" ||
@@ -284,10 +277,32 @@ public class LevelController : MonoBehaviour
                     pieceCount2 == "030002110" ||
                     pieceCount2 == "031002100") 
                 {
-                    Debug.Log("solucao 4"); 
+                    setCollor(boardVector[0], 1, 1);
+                    setCollor(boardVector[1], 1, 1);
+                    setCollor(boardVector[2], 1, 1);
+                    setCollor(boardVector[3], 1, 1);
+                    setColorLed(boardVector[0], false);
+                    setColorLed(boardVector[1], false);
+                    setColorLed(boardVector[2], false);
+                    setColorLed(boardVector[3], false);
+                    setParticle(boardVector[0]);
+                    setParticle(boardVector[1]);
+                    setParticle(boardVector[2]);
+                    setParticle(boardVector[3]);
+
+                    setCollorChild(Level2, 1);
                 }
 
-                break;
+                if (pieceCount2 == "0001021" ||
+                    pieceCount2 == "0002110" )
+                {
+                    setCollor(boardVector[0], 1, 1, 2);
+                    setCollor(boardVector[1], 1, 1, 2);
+                    setCollor(boardVector[2], 1, 1, 2);
+                    setCollor(boardVector[3], 1, 1, 2);
+                }
+
+                    break;
             case 3:
 
                 break;
@@ -380,6 +395,33 @@ public class LevelController : MonoBehaviour
                     child.gameObject.GetComponent<MeshRenderer>().material = getCollor(color2);
                 }
             }
+        }
+        catch
+        {
+
+        }
+    }
+
+    private void setCollor(Piece piece, int color1, int color2, int type)
+    {
+
+        try
+        {   
+            if(piece.getType() != type)
+            {
+                foreach (Transform child in piece.getPiece().transform)
+                {
+                    if (child.name.Contains("left"))
+                    {
+                        child.gameObject.GetComponent<MeshRenderer>().material = getCollor(color1);
+                    }
+                    if (child.name.Contains("right"))
+                    {
+                        child.gameObject.GetComponent<MeshRenderer>().material = getCollor(color2);
+                    }
+                }
+            }
+            
         }
         catch
         {
@@ -486,6 +528,23 @@ public class LevelController : MonoBehaviour
                 return null;
         }
 
+    }
+
+    public void setSwitch(int board)
+    {
+        if(switch1.name == "3switch")
+        {
+            switch1.name = "5switch";
+            switchbar1a.GetComponent<MeshRenderer>().enabled = true;
+            switchbar1b.GetComponent<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            switch1.name = "3switch";
+            switchbar1a.GetComponent<MeshRenderer>().enabled = false;
+            switchbar1b.GetComponent<MeshRenderer>().enabled = true;
+        }
+        controller(2, board2);
     }
 }
 

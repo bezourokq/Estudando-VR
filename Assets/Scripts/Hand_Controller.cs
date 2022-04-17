@@ -59,7 +59,7 @@ public class Hand_Controller : MonoBehaviour
         if (targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryValue ) && primaryValue)
         {
             //gameObject.GetComponent<XRRayInteractor>().enabled = raycastOn;
-            GameObject.Find("Reset").GetComponent<Reset>().reset();
+            //GameObject.Find("Reset").GetComponent<Reset>().reset();
             //raycastOn = !raycastOn;
         }
         if (targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue) && triggerValue > 0.1f)

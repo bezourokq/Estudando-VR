@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 
 public class Board : MonoBehaviour
@@ -44,6 +45,8 @@ public class Board : MonoBehaviour
             collision.gameObject.transform.eulerAngles = new Vector3(0, getRotation(collision.gameObject.transform.eulerAngles.y), 0);
             collision.gameObject.GetComponent<OutlineController>().addHolder(myChild.gameObject.name);
             myChild.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+            if (!collision.gameObject.name.Contains("switch"))
+                collision.gameObject.GetComponent<XRGrabInteractable>().enabled = false;
         }
 
     }

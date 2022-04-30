@@ -43,6 +43,7 @@ public class Board : MonoBehaviour
             //Debug.Log(int.Parse(collision.gameObject.name.Substring(0, 1)));int.Parse(collision.gameObject.name.Substring(0, 1))
 
             collision.gameObject.transform.eulerAngles = new Vector3(0, getRotation(collision.gameObject.transform.eulerAngles.y), 0);
+            
             collision.gameObject.GetComponent<OutlineController>().addHolder(myChild.gameObject.name);
             myChild.gameObject.GetComponent<BoxCollider>().isTrigger = true;
             if (!collision.gameObject.name.Contains("switch"))

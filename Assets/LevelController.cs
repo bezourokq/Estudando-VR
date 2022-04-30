@@ -19,7 +19,7 @@ public class LevelController : MonoBehaviour
     string pieceCount1, pieceCount2, pieceCount3, pieceCount4, pieceCount5;
     public GameObject win1, lose1;
     public Material material1, material2, material3, material4, material5, material6;
-    public GameObject Level1, Level2, level3;
+    public GameObject Level1, Level2, level3,level4a,level4b;
     public GameObject switch1, switch2;
     public GameObject switchbar1a, switchbar1b, switchbar2a, switchbar2b;
     private int level;
@@ -434,7 +434,7 @@ public class LevelController : MonoBehaviour
 
 
 
-                    Debug.Log("Codigo Final " + pieceCount3);
+                    Debug.Log("Codigo Final " + pieceCount3); 
                     if (pieceCount3 == "0030110221" ||
                         pieceCount3 == "0021110230" ||
                         pieceCount3 == "0110221" ||
@@ -500,6 +500,240 @@ public class LevelController : MonoBehaviour
                 }
                 break;
             case 4:
+
+                pieceCount4 = "0";
+                for (int n = 0; n < 5; n++)
+                {
+                    
+                    if (boardVector[n] != null && boardVector[n].getType() == 0)
+                    {
+                       
+                        if (boardVector[n].getDirection() == 0 || boardVector[n].getDirection() == 180)
+                        {
+                            pieceCount4 = pieceCount4 + n.ToString() + "00";
+                            //yellow led
+                            setCollor(boardVector[n], 2, 2);
+                        }
+                        else if (boardVector[n].getDirection() == 90 || boardVector[n].getDirection() == 270)
+                        {
+                            pieceCount4 = pieceCount4 + n.ToString() + "01";
+                            //yellow led
+                            setCollor(boardVector[n], 2, 2);
+                        }
+
+                    }
+                    if (boardVector[n] != null && boardVector[n].getType() == 1)
+                    {
+                       
+                        if (boardVector[n].getDirection() == 0 || boardVector[n].getDirection() == 180)
+                        {
+                            pieceCount4 = pieceCount4 + n.ToString() + "10";
+                            //yellow resistor
+                            setCollor(boardVector[n], 2, 2);
+                        }
+                        else if (boardVector[n].getDirection() == 90 || boardVector[n].getDirection() == 270)
+                        {
+                            pieceCount4 = pieceCount4 + n.ToString() + "11";
+                            //yellow resistor
+                            setCollor(boardVector[n], 2, 2);
+                        }
+
+                    }
+                    if (boardVector[n] != null && boardVector[n].getType() == 2)
+                    {
+
+                        if (boardVector[n].getDirection() == 0)
+                        {
+                            pieceCount4 = pieceCount4 + n.ToString() + "20";
+                            //yellow led
+                            setCollor(boardVector[n], 2, 2);
+                            setColorLed(boardVector[n], false);
+                        }
+                        else if (boardVector[n].getDirection() == 90)
+                        {
+                            pieceCount4 = pieceCount4 + n.ToString() + "21";
+                            //yellow led
+                            setCollor(boardVector[n], 2, 2);
+                            setColorLed(boardVector[n], false);
+                        }
+                        else if (boardVector[n].getDirection() == 180)
+                        {
+                            pieceCount4 = pieceCount4 + n.ToString() + "22";
+                            //yellow led
+                            setCollor(boardVector[n], 2, 2);
+                            setColorLed(boardVector[n], false);
+                        }
+                        else if (boardVector[n].getDirection() == 270)
+                        {
+                            pieceCount4 = pieceCount4 + n.ToString() + "23";
+                            //yellow led
+                            setCollor(boardVector[n], 2, 2);
+                            setColorLed(boardVector[n], false);
+                        }
+
+
+                    }
+                    if (boardVector[n] != null && boardVector[n].getType() == 3)
+                    {
+
+                        if (boardVector[n].getDirection() == 0)
+                        {
+                            pieceCount4 = pieceCount4 + n.ToString() + "30";
+                            //yellow led
+                            setCollor(boardVector[n], 2, 2);
+                        }
+
+                    }
+
+                    
+                    Debug.Log("Codigo Final " + pieceCount4);
+                    if (pieceCount4 == "0123210" ||
+                        pieceCount4 == "0030123210")
+                    {
+                        //setCollor(boardVector[0], 1, 1);
+                        setCollor(boardVector[1], 1, 1);
+                        setCollor(boardVector[2], 1, 1);
+ 
+                        setCollorChild(level4a, 1);
+
+
+                        setColorLed(boardVector[1], true);
+
+                    }
+                    if (pieceCount4 == "0311423" ||
+                        pieceCount4 == "0321411" ||
+                        pieceCount4 == "0030321411" ||
+                        pieceCount4 == "0030210321411" ||
+                        pieceCount4 == "0030101210321411" ||
+                        pieceCount4 == "0030311423" ||
+                        pieceCount4 == "0030210311423" ||
+                        pieceCount4 == "0030101210311423" ||
+                        pieceCount4 == "0210311423")
+                        
+                    {
+                        //setCollor(boardVector[0], 1, 1);
+                        setCollor(boardVector[3], 1, 1);
+                        setCollor(boardVector[4], 1, 1);
+
+                        setCollorChild(level4b, 1);
+
+
+                        setColorLed(boardVector[3], true);
+                        setColorLed(boardVector[4], true);
+
+                    }
+                   
+                    if (pieceCount4 == "0030123210311401" ||
+                        pieceCount4 == "0030123210401")
+                    {
+                        //setCollor(boardVector[0], 1, 1);
+                        setCollor(boardVector[1], 1, 1);
+                        setCollor(boardVector[2], 1, 1);
+                        setCollor(boardVector[3], 1, 1);
+                        setCollor(boardVector[4], 3, 3);
+                        setCollorChild(level4a, 1);
+                        setCollorChild(level4b, 3);
+
+
+                        setColorLed(boardVector[1], true);
+                        
+                    }
+                    if (pieceCount4 == "0030123210311")
+                    {
+                        //setCollor(boardVector[0], 1, 1);
+                        setCollor(boardVector[1], 2, 2);
+                        setCollor(boardVector[2], 1, 1);
+                        setCollor(boardVector[3], 1, 1);
+                        setCollor(boardVector[4], 3, 3);
+                        setCollorChild(level4a, 1);
+                        setCollorChild(level4b, 1);
+
+
+                        setColorLed(boardVector[1], false);
+
+                    }
+                    
+                    if (pieceCount4 == "0030123210301" ||
+                        pieceCount4 == "0030123210301411")
+                    {
+                        //setCollor(boardVector[0], 1, 1);
+                        setCollor(boardVector[1], 1, 1);
+                        setCollor(boardVector[2], 1, 1);
+                        setCollor(boardVector[3], 1, 1);
+                        setCollor(boardVector[4], 3, 3);
+                        setCollorChild(level4a, 1);
+                        setCollorChild(level4b, 1);
+                        //erro no transistor
+
+                        setColorLed(boardVector[1], false);
+
+                    }
+                    //queima a fonte
+                    if(pieceCount4 =="0301401"        ||
+                       pieceCount4 == "0030301401"    ||
+                       pieceCount4 == "0030123301401" ||
+                       pieceCount4 == "0030123301401" ||
+                       pieceCount4 == "0111301401"    ||
+                       pieceCount4 == "0101200"       ||
+                       pieceCount4 == "0101200311"    ||
+                       pieceCount4 == "0101200411"    ||
+                       pieceCount4 == "0101200311411" ||
+                       pieceCount4 == "0030101200311411")
+                    {
+                        Debug.Log("Fonte queimou");
+                    }
+                    //queima O LED
+                    if (pieceCount4 == "0321401" ||
+                        pieceCount4 == "0301423")
+                    {
+                        setCollor(boardVector[3], 1, 1);
+                        setCollor(boardVector[4], 1, 1);
+                        setParticle(boardVector[3]);
+                        setParticle(boardVector[4]);
+                        setCollorChild(level4b, 1);
+                    }
+                    if (pieceCount4 == "0123200" ||
+                        pieceCount4 == "0101220")
+                    {
+                        setCollor(boardVector[1], 1, 1);
+                        setCollor(boardVector[2], 1, 1);
+                        setParticle(boardVector[1]);
+                        setParticle(boardVector[2]);
+                        setCollorChild(level4a, 1);
+
+                    }
+                    //queima o led usando o transistor
+                    if (pieceCount4 == "0030222301" ||
+                        pieceCount4 == "0030200321" ||
+                        pieceCount4 == "0030111222301" ||
+                        pieceCount4 == "0030111222301411") 
+                    {
+                        setCollor(boardVector[1], 1, 1);
+                        setCollor(boardVector[2], 1, 1);
+                        setCollor(boardVector[3], 1, 1);
+                        setCollor(boardVector[4], 1, 1);
+                        setParticle(boardVector[2]);
+                        setParticle(boardVector[3]);
+                        setCollorChild(level4b, 1);
+                        setCollorChild(level4a, 1);
+
+                    }
+                    if (pieceCount4 == "0030210311")
+                    {
+                        setCollor(boardVector[2], 1, 1);
+                        setCollor(boardVector[3], 1, 1);
+                        setCollorChild(level4b, 1);
+                        setCollorChild(level4a, 1);
+                    }
+
+
+
+
+
+
+
+                }
+                
 
                 break;
             case 5:

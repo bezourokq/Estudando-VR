@@ -5,7 +5,6 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
 public class LevelController : MonoBehaviour
 {
     Piece[] board1 = new Piece[2];
@@ -19,7 +18,7 @@ public class LevelController : MonoBehaviour
     string pieceCount1, pieceCount2, pieceCount3, pieceCount4, pieceCount5;
     public GameObject win1, lose1;
     public Material material1, material2, material3, material4, material5, material6;
-    public GameObject Level1, Level2, level3,level4a,level4b;
+    public GameObject Level1, Level2, level3, level4a, level4b;
     public GameObject switch1, switch2;
     public GameObject switchbar1a, switchbar1b, switchbar2a, switchbar2b;
     private int level;
@@ -35,15 +34,16 @@ public class LevelController : MonoBehaviour
     void Start()
     {
         level = 0;
-        //player.transform.position = playerStartPosition.transform.position;
+        player.transform.position = playerStartPosition.transform.position;
         switchbar1a.GetComponent<MeshRenderer>().enabled = false;
+        switchbar2a.GetComponent<MeshRenderer>().enabled = false;
         pieceCount1 = "0";
         pieceCount2 = "0";
         pieceCount3 = "0";
         pieceCount4 = "0";
         pieceCount5 = "0";
-        win1.SetActive(false);
-        lose1.SetActive(false);
+        //win1.SetActive(false);
+        //lose1.SetActive(false);
     }
 
     // Update is called once per frame
@@ -135,14 +135,18 @@ public class LevelController : MonoBehaviour
                     if (pieceCount1 == "0021110" ||
                         pieceCount1 == "0010121")
                     {
-                        Debug.Log("win");
+
                         setCollor(boardVector[0], 1, 1);
                         setCollor(boardVector[1], 1, 1);
                         setCollor(Level1, 1);
 
                         setColorLed(boardVector[0], true);
                         setColorLed(boardVector[1], true);
-                        win1.SetActive(true);
+
+                        GameObject inGameToggle;
+                        inGameToggle = GameObject.Find("Toggle 1/1");
+                        inGameToggle.GetComponent<Toggle>().isOn = true;
+                        //win1.SetActive(true);
                         //green led and resdistor
                     }
                     if (pieceCount1 == "0000121" ||
@@ -157,6 +161,9 @@ public class LevelController : MonoBehaviour
                         setColorLed(boardVector[1], false);
                         lose1.SetActive(true);
                         //green led and resdistor
+                        GameObject inGameToggle;
+                        inGameToggle = GameObject.Find("Toggle 1/2");
+                        inGameToggle.GetComponent<Toggle>().isOn = true;
                     }
 
 
@@ -262,6 +269,8 @@ public class LevelController : MonoBehaviour
                     setColorLed(boardVector[2], true);
                     setColorLed(boardVector[3], true);
                     setCollorChild(Level2, 1);
+
+
                 }
 
                 //led acende com o switch
@@ -278,6 +287,10 @@ public class LevelController : MonoBehaviour
                     setColorLed(boardVector[0], false);
                     setColorLed(boardVector[2], false);
                     setCollorChild(Level2, 1);
+
+                    GameObject inGameToggle;
+                    inGameToggle = GameObject.Find("Toggle 2/1");
+                    inGameToggle.GetComponent<Toggle>().isOn = true;
                 }
 
                 // curto com o fio faz queimar o led
@@ -313,6 +326,10 @@ public class LevelController : MonoBehaviour
                     setParticle(boardVector[3]);
 
                     setCollorChild(Level2, 1);
+
+                    GameObject inGameToggle;
+                    inGameToggle = GameObject.Find("Toggle 2/2");
+                    inGameToggle.GetComponent<Toggle>().isOn = true;
                 }
 
                 //curto circuito
@@ -337,7 +354,9 @@ public class LevelController : MonoBehaviour
                     pieceCount2 == "0000100221" ||
                     pieceCount2 == "0000100321")
                 {
-
+                    GameObject inGameToggle;
+                    inGameToggle = GameObject.Find("Toggle 2/3");
+                    inGameToggle.GetComponent<Toggle>().isOn = true;
                     Debug.Log("Curto na fonte");
                 }
 
@@ -434,7 +453,7 @@ public class LevelController : MonoBehaviour
 
 
 
-                    Debug.Log("Codigo Final " + pieceCount3); 
+                    Debug.Log("Codigo Final " + pieceCount3);
                     if (pieceCount3 == "0030110221" ||
                         pieceCount3 == "0021110230" ||
                         pieceCount3 == "0110221" ||
@@ -444,7 +463,9 @@ public class LevelController : MonoBehaviour
                         pieceCount3 == "0010121230" ||
                         pieceCount3 == "0030121210")
                     {
-                        Debug.Log("win");
+                        GameObject inGameToggle;
+                        inGameToggle = GameObject.Find("Toggle 3/1");
+                        inGameToggle.GetComponent<Toggle>().isOn = true;
                         setCollor(boardVector[0], 1, 1);
                         setCollor(boardVector[1], 1, 1);
                         setCollor(boardVector[2], 1, 1);
@@ -472,6 +493,9 @@ public class LevelController : MonoBehaviour
                         setCollorChild(level3, 1);
                         setColorLed(boardVector[0], false);
                         setColorLed(boardVector[2], false);
+                        GameObject inGameToggle;
+                        inGameToggle = GameObject.Find("Toggle 3/2");
+                        inGameToggle.GetComponent<Toggle>().isOn = true;
                     }
                     if (pieceCount3 == "0021100" ||
                         pieceCount3 == "0100221" ||
@@ -492,6 +516,10 @@ public class LevelController : MonoBehaviour
                         setParticle(boardVector[1]);
                         setParticle(boardVector[2]);
                         setCollorChild(level3, 1);
+
+                        GameObject inGameToggle;
+                        inGameToggle = GameObject.Find("Toggle 3/3");
+                        inGameToggle.GetComponent<Toggle>().isOn = true;
                     }
                 }
                 catch
@@ -504,10 +532,10 @@ public class LevelController : MonoBehaviour
                 pieceCount4 = "0";
                 for (int n = 0; n < 5; n++)
                 {
-                    
+
                     if (boardVector[n] != null && boardVector[n].getType() == 0)
                     {
-                       
+
                         if (boardVector[n].getDirection() == 0 || boardVector[n].getDirection() == 180)
                         {
                             pieceCount4 = pieceCount4 + n.ToString() + "00";
@@ -524,7 +552,7 @@ public class LevelController : MonoBehaviour
                     }
                     if (boardVector[n] != null && boardVector[n].getType() == 1)
                     {
-                       
+
                         if (boardVector[n].getDirection() == 0 || boardVector[n].getDirection() == 180)
                         {
                             pieceCount4 = pieceCount4 + n.ToString() + "10";
@@ -585,7 +613,7 @@ public class LevelController : MonoBehaviour
 
                     }
 
-                    
+
                     Debug.Log("Codigo Final " + pieceCount4);
                     if (pieceCount4 == "0123210" ||
                         pieceCount4 == "0030123210")
@@ -593,7 +621,7 @@ public class LevelController : MonoBehaviour
                         //setCollor(boardVector[0], 1, 1);
                         setCollor(boardVector[1], 1, 1);
                         setCollor(boardVector[2], 1, 1);
- 
+
                         setCollorChild(level4a, 1);
 
 
@@ -609,7 +637,7 @@ public class LevelController : MonoBehaviour
                         pieceCount4 == "0030210311423" ||
                         pieceCount4 == "0030101210311423" ||
                         pieceCount4 == "0210311423")
-                        
+
                     {
                         //setCollor(boardVector[0], 1, 1);
                         setCollor(boardVector[3], 1, 1);
@@ -622,7 +650,7 @@ public class LevelController : MonoBehaviour
                         setColorLed(boardVector[4], true);
 
                     }
-                   
+
                     if (pieceCount4 == "0030123210311401" ||
                         pieceCount4 == "0030123210401")
                     {
@@ -636,7 +664,11 @@ public class LevelController : MonoBehaviour
 
 
                         setColorLed(boardVector[1], true);
-                        
+
+                        GameObject inGameToggle;
+                        inGameToggle = GameObject.Find("Toggle 4/1");
+                        inGameToggle.GetComponent<Toggle>().isOn = true;
+
                     }
                     if (pieceCount4 == "0030123210311")
                     {
@@ -650,9 +682,12 @@ public class LevelController : MonoBehaviour
 
 
                         setColorLed(boardVector[1], false);
+                        GameObject inGameToggle;
+                        inGameToggle = GameObject.Find("Toggle 4/2");
+                        inGameToggle.GetComponent<Toggle>().isOn = true;
 
                     }
-                    
+
                     if (pieceCount4 == "0030123210301" ||
                         pieceCount4 == "0030123210301411")
                     {
@@ -666,21 +701,26 @@ public class LevelController : MonoBehaviour
                         //erro no transistor
 
                         setColorLed(boardVector[1], false);
+                        GameObject inGameToggle;
+                        inGameToggle = GameObject.Find("Toggle 4/4");
+                        inGameToggle.GetComponent<Toggle>().isOn = true;
 
                     }
                     //queima a fonte
-                    if(pieceCount4 =="0301401"        ||
-                       pieceCount4 == "0030301401"    ||
+                    if (pieceCount4 == "0301401" ||
+                       pieceCount4 == "0030301401" ||
                        pieceCount4 == "0030123301401" ||
                        pieceCount4 == "0030123301401" ||
-                       pieceCount4 == "0111301401"    ||
-                       pieceCount4 == "0101200"       ||
-                       pieceCount4 == "0101200311"    ||
-                       pieceCount4 == "0101200411"    ||
+                       pieceCount4 == "0111301401" ||
+                       pieceCount4 == "0101200" ||
+                       pieceCount4 == "0101200311" ||
+                       pieceCount4 == "0101200411" ||
                        pieceCount4 == "0101200311411" ||
                        pieceCount4 == "0030101200311411")
                     {
-                        Debug.Log("Fonte queimou");
+                        GameObject inGameToggle;
+                        inGameToggle = GameObject.Find("Toggle 4/4");
+                        inGameToggle.GetComponent<Toggle>().isOn = true;
                     }
                     //queima O LED
                     if (pieceCount4 == "0321401" ||
@@ -706,7 +746,7 @@ public class LevelController : MonoBehaviour
                     if (pieceCount4 == "0030222301" ||
                         pieceCount4 == "0030200321" ||
                         pieceCount4 == "0030111222301" ||
-                        pieceCount4 == "0030111222301411") 
+                        pieceCount4 == "0030111222301411")
                     {
                         setCollor(boardVector[1], 1, 1);
                         setCollor(boardVector[2], 1, 1);
@@ -717,7 +757,14 @@ public class LevelController : MonoBehaviour
                         setCollorChild(level4b, 1);
                         setCollorChild(level4a, 1);
 
+                        GameObject inGameToggle;
+                        inGameToggle = GameObject.Find("Toggle 4/3");
+                        inGameToggle.GetComponent<Toggle>().isOn = true;
+
+
+
                     }
+                    
                     if (pieceCount4 == "0030210311")
                     {
                         setCollor(boardVector[2], 1, 1);
@@ -733,7 +780,7 @@ public class LevelController : MonoBehaviour
 
 
                 }
-                
+
 
                 break;
             case 5:
@@ -792,35 +839,10 @@ public class LevelController : MonoBehaviour
 
 
 
-private void setCollor(Piece piece, int color1, int color2)
-{
-
-    try
-    {
-        foreach (Transform child in piece.getPiece().transform)
-        {
-            if (child.name.Contains("left"))
-            {
-                child.gameObject.GetComponent<MeshRenderer>().material = getCollor(color1);
-            }
-            if (child.name.Contains("right"))
-            {
-                child.gameObject.GetComponent<MeshRenderer>().material = getCollor(color2);
-            }
-        }
-    }
-    catch
+    private void setCollor(Piece piece, int color1, int color2)
     {
 
-    }
-}
-
-private void setCollor(Piece piece, int color1, int color2, int type)
-{
-
-    try
-    {
-        if (piece.getType() != type)
+        try
         {
             foreach (Transform child in piece.getPiece().transform)
             {
@@ -834,158 +856,206 @@ private void setCollor(Piece piece, int color1, int color2, int type)
                 }
             }
         }
-
-    }
-    catch
-    {
-
-    }
-}
-
-private void setColorLed(Piece piece, bool state)
-{
-    try
-    {
-        foreach (Transform child in piece.getPiece().transform)
+        catch
         {
-            if (state)
+
+        }
+    }
+
+    private void setCollor(Piece piece, int color1, int color2, int type)
+    {
+
+        try
+        {
+            if (piece.getType() != type)
             {
-                if (child.name.Contains("led"))
+                foreach (Transform child in piece.getPiece().transform)
                 {
-                    child.gameObject.GetComponent<MeshRenderer>().material = material4; ;
-                }
-            }
-            else
-            {
-                if (child.name.Contains("led"))
-                {
-                    child.gameObject.GetComponent<MeshRenderer>().material = material5; ;
+                    if (child.name.Contains("left"))
+                    {
+                        child.gameObject.GetComponent<MeshRenderer>().material = getCollor(color1);
+                    }
+                    if (child.name.Contains("right"))
+                    {
+                        child.gameObject.GetComponent<MeshRenderer>().material = getCollor(color2);
+                    }
                 }
             }
 
         }
-    }
-    catch
-    {
-
-    }
-}
-
-private void setParticle(Piece piece)
-{
-
-    try
-    {
-        foreach (Transform child in piece.getPiece().transform)
+        catch
         {
-            if (child.name.Contains("Particle"))
-            {
-                var em = child.gameObject.GetComponent<ParticleSystem>().emission;
-                em.enabled = true;
 
+        }
+    }
+
+    private void setColorLed(Piece piece, bool state)
+    {
+        try
+        {
+            foreach (Transform child in piece.getPiece().transform)
+            {
+                if (state)
+                {
+                    if (child.name.Contains("led"))
+                    {
+                        child.gameObject.GetComponent<MeshRenderer>().material = material4; ;
+                    }
+                }
+                else
+                {
+                    if (child.name.Contains("led"))
+                    {
+                        child.gameObject.GetComponent<MeshRenderer>().material = material5; ;
+                    }
+                }
 
             }
-
         }
-    }
-    catch
-    {
-
-    }
-}
-
-private void setCollor(GameObject line, int color1)
-{
-    line.GetComponent<MeshRenderer>().material = getCollor(color1);
-}
-
-public void setCollorChild(GameObject line, int color1)
-{
-
-    try
-    {
-        foreach (Transform child in line.transform)
+        catch
         {
 
-            child.gameObject.GetComponent<MeshRenderer>().material = getCollor(color1);
+        }
+    }
+
+    private void setParticle(Piece piece)
+    {
+
+        try
+        {
+            foreach (Transform child in piece.getPiece().transform)
+            {
+                if (child.name.Contains("Particle"))
+                {
+                    var em = child.gameObject.GetComponent<ParticleSystem>().emission;
+                    em.enabled = true;
+
+
+                }
+
+            }
+        }
+        catch
+        {
 
         }
     }
-    catch
+
+    private void setCollor(GameObject line, int color1)
     {
-
-    }
-}
-
-
-///1 - green
-///2 - yellow
-///3 - black
-private Material getCollor(int color)
-{
-    switch (color)
-    {
-        case 1:
-            return material1;
-            break;
-        case 2:
-            return material2;
-            break;
-        case 3:
-            return material3;
-            break;
-        case 4:
-            return material6;
-            break;
-        default:
-            return null;
+        line.GetComponent<MeshRenderer>().material = getCollor(color1);
     }
 
-}
-
-public void setSwitch(int board)
-{
-    if (switch1.name == "0switch")
+    public void setCollorChild(GameObject line, int color1)
     {
-        switch1.name = "5switch";
-        switchbar1a.GetComponent<MeshRenderer>().enabled = true;
-        switchbar1b.GetComponent<MeshRenderer>().enabled = false;
-    }
-    else
-    {
-        switch1.name = "0switch";
-        switchbar1a.GetComponent<MeshRenderer>().enabled = false;
-        switchbar1b.GetComponent<MeshRenderer>().enabled = true;
-    }
-    controller(2, board2);
-}
 
-public void nextLevel()
-{
-    level = level + 1;
-    teleportPlayer();
-}
+        try
+        {
+            foreach (Transform child in line.transform)
+            {
 
-public void teleportPlayer()
-{
-    switch (level)
-    {
-        case 1:
-            player.transform.position = playerPosition1.transform.position;
-            break;
-        case 2:
-            player.transform.position = playerPosition2.transform.position;
-            break;
-        case 3:
-            player.transform.position = playerPosition3.transform.position;
-            break;
-        case 4:
-            player.transform.position = playerPosition4.transform.position;
-            break;
-        case 5:
-            player.transform.position = playerPosition5.transform.position;
-            break;
+                child.gameObject.GetComponent<MeshRenderer>().material = getCollor(color1);
+
+            }
+        }
+        catch
+        {
+
+        }
     }
-}
+
+
+    ///1 - green
+    ///2 - yellow
+    ///3 - black
+    private Material getCollor(int color)
+    {
+        switch (color)
+        {
+            case 1:
+                return material1;
+                break;
+            case 2:
+                return material2;
+                break;
+            case 3:
+                return material3;
+                break;
+            case 4:
+                return material6;
+                break;
+            default:
+                return null;
+        }
+
+    }
+
+    public void setSwitch1(int board)
+    {
+        if (switch1.name == "0switch")
+        {
+            switch1.name = "5switch";
+            switchbar1a.GetComponent<MeshRenderer>().enabled = true;
+            switchbar1b.GetComponent<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            switch1.name = "0switch";
+            switchbar1a.GetComponent<MeshRenderer>().enabled = false;
+            switchbar1b.GetComponent<MeshRenderer>().enabled = true;
+        }
+        controller(2, board2);
+    }
+    public void setSwitch2(int board)
+    {
+        if (switch2.name == "0switch (1)")
+        {
+            switch2.name = "5switch (1)";
+            switchbar2a.GetComponent<MeshRenderer>().enabled = true;
+            switchbar2b.GetComponent<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            switch2.name = "0switch (1)";
+            switchbar2a.GetComponent<MeshRenderer>().enabled = false;
+            switchbar2b.GetComponent<MeshRenderer>().enabled = true;
+        }
+        controller(4, board4);
+    }
+
+    public void nextLevel()
+    {
+        level = level + 1;
+        teleportPlayer();
+    }
+
+    public void mainManu()
+    {
+        player.transform.position = playerStartPosition.transform.position;
+        player.transform.position = playerStartPosition.transform.position;
+        level = 0;
+    }
+
+    public void teleportPlayer()
+    {
+        switch (level)
+        {
+            case 1:
+                player.transform.position = playerPosition1.transform.position;
+                break;
+            case 2:
+                player.transform.position = playerPosition2.transform.position;
+                break;
+            case 3:
+                player.transform.position = playerPosition3.transform.position;
+                break;
+            case 4:
+                player.transform.position = playerPosition4.transform.position;
+                break;
+            case 5:
+                player.transform.position = playerPosition5.transform.position;
+                break;
+        }
+    }
 }
 

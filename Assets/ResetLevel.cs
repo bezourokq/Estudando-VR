@@ -8,6 +8,7 @@ public class ResetLevel : MonoBehaviour
 {
     public List<GameObject> Objects = new List<GameObject>();
     public List<GameObject> Cables = new List<GameObject>();
+    public List<GameObject> leds = new List<GameObject>();
     private List<Vector3> ObjectsPosition = new List<Vector3>();
     private List<Quaternion> ObjectsRotation = new List<Quaternion>();
     private List<Material> ObjectsMaterial = new List<Material>();
@@ -66,6 +67,12 @@ public class ResetLevel : MonoBehaviour
         for (int x = 0; x < temp; x++)
         {
             Cables[x].GetComponent<MeshRenderer>().material = ObjectsMaterial[x];
+        }
+
+        temp = leds.Count;
+        for (int x = 0; x < temp; x++)
+        {
+            leds[x].SetActive(false);
         }
 
         var em = particle.GetComponent<ParticleSystem>().emission;

@@ -11,7 +11,8 @@ public class LevelController : MonoBehaviour
     Piece[] board2 = new Piece[4];
     Piece[] board3 = new Piece[3];
     Piece[] board4 = new Piece[7];
-    Piece[] board5 = new Piece[5];
+    Piece[] board5 = new Piece[7];
+    public GameObject[] display;
     public GameObject player;
     public GameObject playerStartPosition;
     public GameObject playerPosition1, playerPosition2, playerPosition3, playerPosition4, playerPosition5;
@@ -44,8 +45,11 @@ public class LevelController : MonoBehaviour
         pieceCount5 = "0";
         //win1.SetActive(false);
         //lose1.SetActive(false);
+        for (int n = 0; n < 7; n++)
+        {
+            display[n].SetActive(false);
+        }
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -56,6 +60,8 @@ public class LevelController : MonoBehaviour
     void controller(int board, Piece[] boardVector)
     {
         Debug.Log("Numero board " + board);
+        SoundController t = GameObject.Find("SoundController").GetComponent<SoundController>();
+        t.PlaySound(1);
         foreach (Piece piece in boardVector)
         {
             try
@@ -146,6 +152,7 @@ public class LevelController : MonoBehaviour
                         GameObject inGameToggle;
                         inGameToggle = GameObject.Find("Toggle 1/1");
                         inGameToggle.GetComponent<Toggle>().isOn = true;
+                        t.PlaySound(2);
                         //win1.SetActive(true);
                         //green led and resdistor
                     }
@@ -271,6 +278,7 @@ public class LevelController : MonoBehaviour
                     setCollorChild(Level2, 1);
 
 
+
                 }
 
                 //led acende com o switch
@@ -291,6 +299,7 @@ public class LevelController : MonoBehaviour
                     GameObject inGameToggle;
                     inGameToggle = GameObject.Find("Toggle 2/1");
                     inGameToggle.GetComponent<Toggle>().isOn = true;
+                    t.PlaySound(2);
                 }
 
                 // curto com o fio faz queimar o led
@@ -466,6 +475,7 @@ public class LevelController : MonoBehaviour
                         GameObject inGameToggle;
                         inGameToggle = GameObject.Find("Toggle 3/1");
                         inGameToggle.GetComponent<Toggle>().isOn = true;
+                        t.PlaySound(2);
                         setCollor(boardVector[0], 1, 1);
                         setCollor(boardVector[1], 1, 1);
                         setCollor(boardVector[2], 1, 1);
@@ -495,6 +505,7 @@ public class LevelController : MonoBehaviour
                         setColorLed(boardVector[2], false);
                         GameObject inGameToggle;
                         inGameToggle = GameObject.Find("Toggle 3/2");
+                        t.PlaySound(2);
                         inGameToggle.GetComponent<Toggle>().isOn = true;
                     }
                     if (pieceCount3 == "0021100" ||
@@ -668,6 +679,7 @@ public class LevelController : MonoBehaviour
                         GameObject inGameToggle;
                         inGameToggle = GameObject.Find("Toggle 4/1");
                         inGameToggle.GetComponent<Toggle>().isOn = true;
+                        t.PlaySound(2);
 
                     }
                     if (pieceCount4 == "0030123210311")
@@ -685,6 +697,7 @@ public class LevelController : MonoBehaviour
                         GameObject inGameToggle;
                         inGameToggle = GameObject.Find("Toggle 4/2");
                         inGameToggle.GetComponent<Toggle>().isOn = true;
+                        t.PlaySound(2);
 
                     }
 
@@ -784,7 +797,34 @@ public class LevelController : MonoBehaviour
 
                 break;
             case 5:
+                pieceCount5 = "0";
+                for (int n = 0; n < 7; n++)
+                {
+                    if (boardVector[n] != null && boardVector[n].getType() == 1)
+                    {
+                        Debug.Log(n);
 
+                        if (boardVector[n].getDirection() == 0 || boardVector[n].getDirection() == 180)
+                        {
+                            pieceCount5 = pieceCount5 + n.ToString() + "11";
+                            //yellow led
+                            setCollor(boardVector[n], 1, 1);
+                            display[n].SetActive(true);
+                        }
+                   }
+                }
+
+                Debug.Log("Codigo Final " + pieceCount5);
+
+                if (pieceCount5 == "0211311411511")
+                {
+                    GameObject inGameToggle;
+                    inGameToggle = GameObject.Find("Toggle 5/1");
+                    inGameToggle.GetComponent<Toggle>().isOn = true;
+                    Debug.Log("Fez o 4");
+                    t.PlaySound(2);
+                }
+                
                 break;
         }
 
@@ -834,7 +874,7 @@ public class LevelController : MonoBehaviour
 
         board4 = new Piece[7];
 
-        board5 = new Piece[5];
+        board5 = new Piece[7];
     }
 
 
